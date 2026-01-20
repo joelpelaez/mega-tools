@@ -1,0 +1,158 @@
+name: MegaTools
+main: com.joemaxsolutions.mc.megatools.MegaTools
+version: 1.2b
+description: Super powered tools provider
+author: Joe Max Solutions
+api-version: '1.21.6'
+
+commands:
+  megasword:
+    description: Get a powerful sword
+    usage: /<command> [player] [fire|nofire]
+    permission: megatools.megasword
+    permission-message: "&cYou don't have permission to use this command"
+  megaaxe:
+    description: Get a powerful axe
+    usage: /<command> [player] [fortune|silk]
+    permission: megatools.megaaxe
+    permission-message: "&cYou don't have permission to use this command"
+  megapickaxe:
+    description: Get a powerful pickaxe
+    usage: /<command> [player] [fortune|silk]
+    permission: megatools.megapickaxe
+    permission-message: "&cYou don't have permission to use this command"
+  ultimatepickaxe:
+    description: Get the ultimate pickaxe
+    usage: /<command> [player] [fortune|silk]
+    permission: megatools.ultimatepickaxe
+    permission-message: "&cYou don't have permission to use this command"
+  megashovel:
+    description: Get a powerful shovel
+    usage: /<command> [player] [fortune|silk]
+    permission: megatools.megashovel
+    permission-message: "&cYou don't have permission to use this command"
+  megahoe:
+    description: Get a powerful hoe
+    usage: /<command> [player] [fortune|silk]
+    permission: megatools.megahoe
+    permission-message: "&cYou don't have permission to use this command"
+  megabow:
+    description: Get a powerful bow
+    usage: /<command> [player] [fire|nofire]
+    permission: megatools.megabow
+    permission-message: "&cYou don't have permission to use this command"
+  ultimatebow:
+    description: Get the ultimate bow
+    usage: /<command> [player] [fire|nofire]
+    permission: megatools.ultimatebow
+    permission-message: "&cYou don't have permission to use this command"
+  megacrossbow:
+    description: Get a powerful crossbow
+    usage: /<command> [player]
+    permission: megatools.megacrossbow
+    permission-message: "&cYou don't have permission to use this command"
+  megafns:
+    description: Get a flint and steel
+    usage: /<command> [player]
+    permission: megatools.megafns
+    permission-message: "&cYou don't have permission to use this command"
+  megashears:
+    description: Get a shears
+    usage: /<command> [player]
+    permission: megatools.megashears
+    permission-message: "&cYou don't have permission to use this command"
+  megaarmor:
+    description: Get a mega armor set
+    usage: /<command> [player]
+    permission: megatools.megaarmor
+    permission-message: "&cYou don't have permission to use this command"
+  megashield:
+    description: Get a shield
+    usage: /<command> [player]
+    permission: megatools.megashield
+    permission-message: "&cYou don't have permission to use this command"
+  megatrident:
+    description: Get a trident
+    usage: /<command> [player] [riptide|channeling]
+    permission: megatools.megatrident
+    permission-message: "&cYou don't have permission to use this command"
+  ultimatetrident:
+    description: Get a ultimate trident
+    usage: /<command> [player]
+    permission: megatools.ultimatetrident
+    permission-message: "&cYou don't have permission to use this command"
+  megafishingrod:
+    description: Get a fishing rod
+    usage: /<command> [player]
+    permission: megatools.megafishingrod
+    permission-message: "&cYou don't have permission to use this command"
+
+permissions:
+  megatools.*:
+    description: Gives access all MegaTools commands.
+    default: op
+    children:
+      megatools.megasword: true
+      megatools.megaaxe: true
+      megatools.megapickaxe: true
+      megatools.utltimatepickaxe: true
+      megatools.megashovel: true
+      megatools.megahoe: true
+      megatools.megabow: true
+      megatools.ultimatebow: true
+      megatools.megacrossbow: true
+      megatools.megaarmor: true
+      megatools.megafns: true
+      megatools.megashears: true
+      megatools.megashield: true
+      megatools.megatrident: true
+      megatools.ultimatetrident: true
+      megatools.megafishingrod: true
+  megatools.megasword:
+    description: Allow give a enchanted sword to Player
+    default: op
+  megatools.megaaxe:
+    description: Allow give a enchanted axe to Player
+    default: op
+  megatools.megapickaxe:
+    description: Allow give a enchanted pickaxe to Player
+    default: op
+  megatools.ultimatepickaxe:
+    description: Allow give a enchanted pickaxe to Player
+    default: op
+  megatools.megashovel:
+    description: Allow give a enchanted shovel to Player
+    default: op
+  megatools.megahoe:
+    description: Allow give a enchanted hoe to Player
+    default: op
+  megatools.megabow:
+    description: Allow give a enchanted bow to Player
+    default: op
+  megatools.ultimatebow:
+    description: Allow give a enchanted bow to Player
+    default: op
+  megatools.megacrossbow:
+    description: Allow give a enchanted crossbow to Player
+    default: op
+  megatools.megafns:
+    description: Allow give a enchanted flint and steel to Player
+    default: op
+  megatools.megashears:
+    description: Allow give a enchanted shears to Player
+    default: op
+  megatools.megaarmor:
+    description: Allow give a enchanted armor set to Player
+    default: op
+  megatools.megashield:
+    description: Allow give a enchanted shield to Player
+    default: op
+  megatools.megatrident:
+    description: Allow give a enchanted trident to Player
+    default: op
+  megatools.ultimatetrident:
+    description: Allow give a enchanted trident to Player
+    default: op
+  megatools.megafishingrod:
+    description: Allow give a enchanted trident to Player
+    default: op
