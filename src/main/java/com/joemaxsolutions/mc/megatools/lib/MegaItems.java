@@ -430,7 +430,7 @@ public class MegaItems {
         // Add lore
         ItemLore lore = ItemLore
                 .lore()
-                .addLine(Component.text("The Ultimate Trient!"))
+                .addLine(Component.text("The Ultimate Trident!"))
                 .addLine(Component.text("Impale to your enemies and throw them to sea (or river)"))
                 .addLine(Component.text("Use it!"))
                 .build();
