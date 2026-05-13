@@ -1,6 +1,6 @@
 name: MegaTools
 main: com.joemaxsolutions.mc.megatools.MegaTools
-version: 1.2b
+version: 1.4.0-SNAPSHOT
 description: Super powered tools provider
 author: Joe Max Solutions
 api-version: '26.1.2'
