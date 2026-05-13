@@ -3,7 +3,7 @@ main: com.joemaxsolutions.mc.megatools.MegaTools
 version: 1.2b
 description: Super powered tools provider
 author: Joe Max Solutions
-api-version: '1.21.6'
+api-version: '26.1.2'
 
 commands:
   megasword:
