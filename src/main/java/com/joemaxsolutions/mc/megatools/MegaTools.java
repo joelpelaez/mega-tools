@@ -19,6 +19,7 @@
 package com.joemaxsolutions.mc.megatools;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.slf4j.Logger;
@@ -43,24 +44,28 @@ public class MegaTools extends JavaPlugin implements Listener {
 
         MegaToolsCommandExecutor executor = new MegaToolsCommandExecutor();
 
-        Objects.requireNonNull(getCommand("megasword")).setExecutor(executor);
-        Objects.requireNonNull(getCommand("megaaxe")).setExecutor(executor);
-        Objects.requireNonNull(getCommand("megapickaxe")).setExecutor(executor);
-        Objects.requireNonNull(getCommand("ultimatepickaxe")).setExecutor(executor);
-        Objects.requireNonNull(getCommand("megashovel")).setExecutor(executor);
-        Objects.requireNonNull(getCommand("megahoe")).setExecutor(executor);
-        Objects.requireNonNull(getCommand("megabow")).setExecutor(executor);
-        Objects.requireNonNull(getCommand("ultimatebow")).setExecutor(executor);
-        Objects.requireNonNull(getCommand("megafns")).setExecutor(executor);
-        Objects.requireNonNull(getCommand("megashears")).setExecutor(executor);
-        Objects.requireNonNull(getCommand("megaarmor")).setExecutor(executor);
-        Objects.requireNonNull(getCommand("megacrossbow")).setExecutor(executor);
-        Objects.requireNonNull(getCommand("megashield")).setExecutor(executor);
-        Objects.requireNonNull(getCommand("megatrident")).setExecutor(executor);
-        Objects.requireNonNull(getCommand("ultimatetrident")).setExecutor(executor);
-        Objects.requireNonNull(getCommand("megafishingrod")).setExecutor(executor);
+        configureCommand("megasword", executor);
+        configureCommand("megaaxe", executor);
+        configureCommand("megapickaxe", executor);
+        configureCommand("ultimatepickaxe", executor);
+        configureCommand("megashovel", executor);
+        configureCommand("megahoe", executor);
+        configureCommand("megabow", executor);
+        configureCommand("ultimatebow", executor);
+        configureCommand("megafns", executor);
+        configureCommand("megashears", executor);
+        configureCommand("megaarmor", executor);
+        configureCommand("megacrossbow", executor);
+        configureCommand("megashield", executor);
+        configureCommand("megatrident", executor);
+        configureCommand("ultimatetrident", executor);
+        configureCommand("megafishingrod", executor);
 
         getLogger().info("Enabled MegeTools Beta");
+    }
+
+    private void configureCommand(String commandName, CommandExecutor executor) {
+        Objects.requireNonNull(getCommand(commandName)).setExecutor(executor);
     }
 
     @Override
