@@ -154,5 +154,5 @@ permissions:
     description: Allow give a enchanted trident to Player
     default: op
   megatools.megafishingrod:
-    description: Allow give a enchanted trident to Player
+    description: Allow give a enchanted fishing rod to Player
     default: op
