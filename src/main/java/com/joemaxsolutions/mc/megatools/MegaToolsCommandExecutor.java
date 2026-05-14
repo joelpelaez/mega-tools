@@ -108,165 +108,156 @@ public class MegaToolsCommandExecutor implements CommandExecutor {
         return false;
     }
 
-    private boolean commandMegaSword(Player target, CommandSender sender, Command cmd, String label, String[] args) {
-        boolean fire = true;
+    private static class ArgumentCheckerResult {
+        public boolean successful;
+        public boolean result;
+        public String errorMessage;
+
+        public static ArgumentCheckerResult Ok(boolean result) {
+            var value = new ArgumentCheckerResult();
+            value.successful = true;
+            value.result = result;
+            return value;
+        }
+
+        public static ArgumentCheckerResult Error(String errorMessage) {
+            var value = new ArgumentCheckerResult();
+            value.successful = false;
+            value.errorMessage = errorMessage;
+            return value;
+        }
+    }
+
+    private ArgumentCheckerResult exclusiveArgumentChecker(String[] args, String trueTerm, String falseTerm, boolean defaultValue, String badArgumentString) {
+        var value = defaultValue;
 
         if (args.length > 2) {
-            sender.sendMessage(tl("tooArguments"));
-            return false;
+            return ArgumentCheckerResult.Error(tl("tooArguments"));
         }
 
         if (args.length == 2) {
-            if (args[1].equals("fire")) fire = true;
-            else if (args[1].equals("nofire")) fire = false;
+            if (args[1].equals(trueTerm)) value = true;
+            else if (args[1].equals(falseTerm)) value = false;
             else {
-                sender.sendMessage(tl("badArgumentN"));
-                return false;
+                return ArgumentCheckerResult.Error(tl(badArgumentString));
             }
         }
+
+        return ArgumentCheckerResult.Ok(value);
+    }
+
+    private ArgumentCheckerResult checkFire(String[] args) {
+        return exclusiveArgumentChecker(args, "fire", "nofire", true, "badArgumentN");
+    }
+
+    private ArgumentCheckerResult checkFortune(String[] args) {
+        return exclusiveArgumentChecker(args, "fortune", "silk", true, "badArgumentF");
+    }
+
+    private ArgumentCheckerResult checkRiptide(String[] args) {
+        return exclusiveArgumentChecker(args, "riptide", "channeling", true, "badArgumentR");
+    }
+
+    private boolean commandMegaSword(Player target, CommandSender sender, Command cmd, String label, String[] args) {
+        var c = checkFire(args);
+
+        if (!c.successful) {
+            sender.sendMessage(c.errorMessage);
+            return false;
+        }
+
         PlayerInventory inventory = target.getInventory();
-        ItemStack sword = MegaItems.getMegaSword(fire);
+        ItemStack sword = MegaItems.getMegaSword(c.result);
         inventory.addItem(sword);
         target.sendMessage(tl("powerfulSword"));
         return true;
     }
 
     private boolean commandMegaAxe(Player target, CommandSender sender, Command cmd, String label, String[] args) {
-        boolean fortune = true;
+        var c = checkFortune(args);
 
-        if (args.length > 2) {
-            sender.sendMessage(tl("tooArguments"));
+        if (!c.successful) {
+            sender.sendMessage(c.errorMessage);
             return false;
         }
 
-        if (args.length == 2) {
-            if (args[1].equals("fortune")) fortune = true;
-            else if (args[1].equals("silk")) fortune = false;
-            else {
-                sender.sendMessage(tl("badArgumentF"));
-                return false;
-            }
-        }
-
         PlayerInventory inventory = target.getInventory();
-        ItemStack axe = MegaItems.getMegaAxe(fortune);
+        ItemStack axe = MegaItems.getMegaAxe(c.result);
         inventory.addItem(axe);
         target.sendMessage(tl("powerfulAxe"));
         return true;
     }
 
     private boolean commandMegaPickaxe(Player target, CommandSender sender, Command cmd, String label, String[] args) {
-        boolean fortune = true;
+        var c = checkFortune(args);
 
-        if (args.length > 2) {
-            sender.sendMessage(tl("tooArguments"));
+        if (!c.successful) {
+            sender.sendMessage(c.errorMessage);
             return false;
         }
 
-        if (args.length == 2) {
-            if (args[1].equals("fortune")) fortune = true;
-            else if (args[1].equals("silk")) fortune = false;
-            else {
-                sender.sendMessage(tl("badArgumentF"));
-                return false;
-            }
-        }
-
         PlayerInventory inventory = target.getInventory();
-        ItemStack pickaxe = MegaItems.getMegaPickaxe(fortune);
+        ItemStack pickaxe = MegaItems.getMegaPickaxe(c.result);
         inventory.addItem(pickaxe);
         target.sendMessage(tl("powerfulPickaxe"));
         return true;
     }
 
     private boolean commandUltimatePickaxe(Player target, CommandSender sender, Command cmd, String label, String[] args) {
-        boolean fortune = true;
+        var c = checkFortune(args);
 
-        if (args.length > 2) {
-            sender.sendMessage(tl("tooArguments"));
+        if (!c.successful) {
+            sender.sendMessage(c.errorMessage);
             return false;
         }
 
-        if (args.length == 2) {
-            if (args[1].equals("fortune")) fortune = true;
-            else if (args[1].equals("silk")) fortune = false;
-            else {
-                sender.sendMessage(tl("badArgumentF"));
-                return false;
-            }
-        }
-
         PlayerInventory inventory = target.getInventory();
-        ItemStack pickaxe = MegaItems.getUltimatePickaxe(fortune);
+        ItemStack pickaxe = MegaItems.getUltimatePickaxe(c.result);
         inventory.addItem(pickaxe);
         target.sendMessage(tl("powerfulPickaxe"));
         return true;
     }
 
     private boolean commandMegaShovel(Player target, CommandSender sender, String label, String[] args) {
-        boolean fortune = true;
+        var c = checkFortune(args);
 
-        if (args.length > 2) {
-            sender.sendMessage(tl("tooArguments"));
+        if (!c.successful) {
+            sender.sendMessage(c.errorMessage);
             return false;
-        }
-        if (args.length == 2) {
-            if (args[1].equals("fortune")) fortune = true;
-            else if (args[1].equals("silk")) fortune = false;
-            else {
-                sender.sendMessage(tl("badArgumentF"));
-                return false;
-            }
         }
 
         PlayerInventory inventory = target.getInventory();
-        ItemStack shovel = MegaItems.getMegaShovel(fortune);
+        ItemStack shovel = MegaItems.getMegaShovel(c.result);
         inventory.addItem(shovel);
         target.sendMessage(tl("powerfulShovel"));
         return true;
     }
 
     private boolean commandMegaHoe(Player target, CommandSender sender, String label, String[] args) {
-        boolean fortune = true;
+        var c = checkFortune(args);
 
-        if (args.length > 2) {
-            sender.sendMessage(tl("tooArguments"));
+        if (!c.successful) {
+            sender.sendMessage(c.errorMessage);
             return false;
-        }
-        if (args.length == 2) {
-            if (args[1].equals("fortune")) fortune = true;
-            else if (args[1].equals("silk")) fortune = false;
-            else {
-                sender.sendMessage(tl("badArgumentF"));
-                return false;
-            }
         }
 
         PlayerInventory inventory = target.getInventory();
-        ItemStack shovel = MegaItems.getMegaHoe(fortune);
+        ItemStack shovel = MegaItems.getMegaHoe(c.result);
         inventory.addItem(shovel);
         target.sendMessage(tl("powerfulHoe"));
         return true;
     }
 
     private boolean commandMegaBow(Player target, CommandSender sender, String label, String[] args) {
-        boolean fire = true;
+        var c = checkFire(args);
 
-        if (args.length > 2) {
-            sender.sendMessage(tl("tooArguments"));
+        if (!c.successful) {
+            sender.sendMessage(c.errorMessage);
             return false;
-        }
-        if (args.length == 2) {
-            if (args[1].equals("fire")) fire = true;
-            else if (args[1].equals("nofire")) fire = false;
-            else {
-                sender.sendMessage(tl("badArgumentN"));
-                return false;
-            }
         }
 
         PlayerInventory inventory = target.getInventory();
-        ItemStack bow = MegaItems.getMegaBow(fire);
+        ItemStack bow = MegaItems.getMegaBow(c.result);
         inventory.addItem(bow);
         ItemStack arrow = new ItemStack(Material.ARROW);
         if (!(inventory.contains(arrow))) inventory.addItem(arrow);
@@ -275,23 +266,15 @@ public class MegaToolsCommandExecutor implements CommandExecutor {
     }
 
     private boolean commandUltimateBow(Player target, CommandSender sender, String label, String[] args) {
-        boolean fire = true;
+        var c = checkFire(args);
 
-        if (args.length > 2) {
-            sender.sendMessage(tl("tooArguments"));
+        if (!c.successful) {
+            sender.sendMessage(c.errorMessage);
             return false;
-        }
-        if (args.length == 2) {
-            if (args[1].equals("fire")) fire = true;
-            else if (args[1].equals("nofire")) fire = false;
-            else {
-                sender.sendMessage(tl("badArgumentN"));
-                return false;
-            }
         }
 
         PlayerInventory inventory = target.getInventory();
-        ItemStack bow = MegaItems.getUltimateBow(fire);
+        ItemStack bow = MegaItems.getUltimateBow(c.result);
         inventory.addItem(bow);
         ItemStack arrow = new ItemStack(Material.ARROW);
         if (!(inventory.contains(arrow))) inventory.addItem(arrow);
@@ -366,22 +349,15 @@ public class MegaToolsCommandExecutor implements CommandExecutor {
     }
 
     private boolean commandMegaTrident(Player target, CommandSender sender, String label, String[] args) {
-        boolean riptide = true;
+        var c = checkRiptide(args);
 
-        if (args.length > 2) {
-            sender.sendMessage(tl("tooArguments"));
+        if (!c.successful) {
+            sender.sendMessage(c.errorMessage);
             return false;
         }
-        if (args.length == 2) {
-            if (args[1].equals("riptide")) riptide = true;
-            else if (args[1].equals("channeling")) riptide = false;
-            else {
-                sender.sendMessage(tl("badArgumentN"));
-                return false;
-            }
-        }
+
         PlayerInventory inventory = target.getInventory();
-        ItemStack trident = MegaItems.getMegaTrident(riptide);
+        ItemStack trident = MegaItems.getMegaTrident(c.result);
         inventory.addItem(trident);
         target.sendMessage(tl("powerfulTrident"));
         return true;
